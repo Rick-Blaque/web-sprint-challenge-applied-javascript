@@ -23,7 +23,7 @@ const Tabs = (topics) => {
     tab.classList.add('tab')
     main.appendChild(tab)
   });
-  main.classList.add(topics)
+  main.classList.add('topics')
   return main
 }
 
