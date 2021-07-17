@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,6 +19,32 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+
+  let card = document.createElement('div')
+  let headline = document.createElement('div')
+  let author = document.createElement('div')
+  let imgCont = document.createElement('div')
+  let img = document.createElement('img')
+  let span = document.createElement('span')
+
+  card.classList.add('card')
+  headline.classList.add('headline')
+  author.classList.add('author')
+  imgCont.classList.add('img-container')
+
+  headline.textContent = article.headline;
+  span.textContent = `By ${article.authorName}`
+  img.src =  article.authorPhoto
+
+  card.appendChild(headline)
+  card.appendChild(author)
+  author.appendChild(imgCont)
+  author.appendChild(span)
+  imgCont.appendChild(img)
+
+
+return card
+
 }
 
 const cardAppender = (selector) => {
@@ -28,6 +56,39 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+
+  let info = axios.get('https://lambda-times-api.herokuapp.com/articles')
+  info.then((data) => {
+    console.log(data.data.articles)
+      let bootstrap = data.data.articles.bootstrap
+      let javascript = data.data.articles.javascript
+      let jquery = data.data.articles.jquery
+      let node1 = data.data.articles.node
+      let tech = data.data.articles.technology
+
+      let sel = document.querySelector(selector)
+      bootstrap.forEach(el => {
+        let art = Card(el)
+        sel.appendChild(art)
+      });
+      javascript.forEach(el => {
+        let art = Card(el)
+        sel.appendChild(art)
+      });
+      jquery.forEach(el => {
+        let art = Card(el)
+        sel.appendChild(art)
+      });
+      node1.forEach(el => {
+        let art = Card(el)
+        sel.appendChild(art)
+      });
+      tech.forEach(el => {
+        let art = Card(el)
+        sel.appendChild(art)
+      });
+      return sel
+  })
 }
 
 export { Card, cardAppender }
