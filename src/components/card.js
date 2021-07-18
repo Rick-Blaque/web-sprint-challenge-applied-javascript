@@ -34,8 +34,8 @@ const Card = (article) => {
 
   headline.textContent = article.headline;
   span.textContent = `By ${article.authorName}`
-  img.src =  article.authorPhoto
-
+  img.src = article.authorPhoto
+  // appending
   card.appendChild(headline)
   card.appendChild(author)
   author.appendChild(imgCont)
@@ -43,7 +43,7 @@ const Card = (article) => {
   imgCont.appendChild(img)
 
 
-return card
+  return card
 
 }
 
@@ -60,34 +60,34 @@ const cardAppender = (selector) => {
   let info = axios.get('https://lambda-times-api.herokuapp.com/articles')
   info.then((data) => {
     console.log(data.data.articles)
-      let bootstrap = data.data.articles.bootstrap
-      let javascript = data.data.articles.javascript
-      let jquery = data.data.articles.jquery
-      let node1 = data.data.articles.node
-      let tech = data.data.articles.technology
+    let bootstrap = data.data.articles.bootstrap
+    let javascript = data.data.articles.javascript
+    let jquery = data.data.articles.jquery
+    let node1 = data.data.articles.node
+    let tech = data.data.articles.technology
 
-      let sel = document.querySelector(selector)
-      bootstrap.forEach(el => {
-        let art = Card(el)
-        sel.appendChild(art)
-      });
-      javascript.forEach(el => {
-        let art = Card(el)
-        sel.appendChild(art)
-      });
-      jquery.forEach(el => {
-        let art = Card(el)
-        sel.appendChild(art)
-      });
-      node1.forEach(el => {
-        let art = Card(el)
-        sel.appendChild(art)
-      });
-      tech.forEach(el => {
-        let art = Card(el)
-        sel.appendChild(art)
-      });
-      return sel
+    let sel = document.querySelector(selector)
+    bootstrap.forEach(el => {
+      let art = Card(el)
+      sel.appendChild(art)
+    });
+    javascript.forEach(el => {
+      let art = Card(el)
+      sel.appendChild(art)
+    });
+    jquery.forEach(el => {
+      let art = Card(el)
+      sel.appendChild(art)
+    });
+    node1.forEach(el => {
+      let art = Card(el)
+      sel.appendChild(art)
+    });
+    tech.forEach(el => {
+      let art = Card(el)
+      sel.appendChild(art)
+    });
+    return sel
   })
 }
 
